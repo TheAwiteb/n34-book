@@ -1,0 +1,1065 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>n34 documentation</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">n34 documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://git.4rs.nl/awiteb/n34.git" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-git"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="command-line-usage"><a class="header" href="#command-line-usage">Command-Line Usage</a></h1>
+<h2 id="philosophy"><a class="header" href="#philosophy">Philosophy</a></h2>
+<p><code>n34</code> emphasizes simplicity by exclusively handling Nostr tasks, requiring
+users to manage Git operations themselves. For instance, it won't merge or
+rebase patches into a branch but will prompt you to specify where to write them,
+allowing you to merge them using <code>git-am</code>. Similarly, when sending patches, it
+won't ask for the commits but will request the patch files instead.</p>
+<p>This approach enhances simplicity and freedom, giving you full control over
+your workflow. Additionally, it simplifies software maintenance by avoiding
+unnecessary complexity.</p>
+<h2 id="options"><a class="header" href="#options">Options</a></h2>
+<p>The <code>n34</code> command-line tool accepts the following options:</p>
+<ul>
+<li><code>-s</code>, <code>--secret-key</code>: Your Nostr secret key (in <code>nsec</code> format), used for
+signing events.</li>
+<li><code>-b</code>, <code>--bunker-url</code>: The URL of a NIP-46 bunker service used for remote
+signing of events.</li>
+<li><code>-7</code>, <code>--nip07</code>: Enables signing events using the browser's NIP-07
+extension. Listens on <code>127.0.0.1:51034</code>. You can configure the address with <code>n34   config nip07</code></li>
+<li><code>-r</code>, <code>--relays</code>: A relay to read from and write to. This option can be
+specified multiple times to connect to several relays.</li>
+<li><code>--pow</code>: Sets the Proof of Work difficulty required when creating events.</li>
+<li><code>--config</code>: Specifies a custom path to the configuration file (Default:
+<code>$HOME/.config/n34/config.toml</code>).</li>
+<li><code>-v</code>, <code>--verbose...</code>: Increases the logging verbosity. Can be used multiple
+times for more detail (e.g., <code>-v</code>, <code>-vv</code>).</li>
+</ul>
+<p><strong>Note:</strong> The <code>--secret-key</code>, <code>--nip07</code> and <code>--bunker-url</code> options are mutually
+exclusive. You must provide exactly one signing method.</p>
+<h2 id="multiple-repositories"><a class="header" href="#multiple-repositories">Multiple Repositories</a></h2>
+<p>Commands that interact with a repository, such as submitting an issue or a
+patch, can accept multiple repository addresses (<code>naddr</code>). This feature is
+useful for projects with multiple maintainers who each have their own repository
+fork.</p>
+<blockquote>
+<p><strong>Important:</strong> When you provide multiple repositories, <code>n34</code> does not
+create a separate issue or patch for each one. Instead, it creates a single
+event that references all of the specified repositories.</p>
+</blockquote>
+<h2 id="the-nostr-address-file"><a class="header" href="#the-nostr-address-file">The <code>nostr-address</code> File</a></h2>
+<p>The <code>nostr-address</code> file is a plain text file that stores a list of project
+repository addresses. This allows the <code>n34</code> to find and use them
+without requiring you to enter the addresses manually.</p>
+<h3 id="format"><a class="header" href="#format">Format</a></h3>
+<ul>
+<li>Each line must contain a single addressable event coordinate <code>naddr</code> which is
+the repository address.</li>
+<li>Lines beginning with a <code>#</code> are treated as comments and are ignored.</li>
+<li>Empty lines are also ignored.</li>
+</ul>
+<h2 id="passing-repositories"><a class="header" href="#passing-repositories">Passing repositories</a></h2>
+<p>By default, <code>n34</code> will look for a <code>nostr-address</code> file to extract repositories
+from it. This is why repositories are not required for commands like <code>patch send</code> and <code>issue new</code>. You can also pass repositories using the <code>--repo</code>
+option or the <code>&lt;NADDR-NIP05-OR-SET&gt;</code> argument for commands that accept them. The
+supported formats for manual input are:</p>
+<ul>
+<li>A <a href="https://github.com/nostr-protocol/nips/blob/master/19.md">NIP-19</a> addressable event coordinate <code>naddr</code>.</li>
+<li>A <a href="https://github.com/nostr-protocol/nips/blob/master/05.md">NIP-05</a> identifier and repository name, in the format
+<code>&lt;nip05&gt;/&lt;repo-name&gt;</code>.</li>
+<li>A set name that contains repository addresses.</li>
+</ul>
+<p>You do not need to specify relays for these commands if your <code>naddr</code> or <code>NIP-05</code>
+identifier already includes relays; <code>n34</code> will automatically extract them.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="managing-repository-and-relay-sets"><a class="header" href="#managing-repository-and-relay-sets">Managing Repository and Relay Sets</a></h1>
+<p>Sets are a convenience feature for contributing to projects that do not have a
+<code>nostr-address</code> file. Instead of manually specifying the project's repositories
+and relays for every command, you can define them once as a named "set". You can
+then reference this set by its name in commands. This allows you to use the set
+as a shortcut for a list of relays (<code>--relays &lt;set_name&gt;</code>) or as the project's
+address in commands like <code>issue</code> and <code>patch</code>.</p>
+<p>Sets are defined in your configuration file. To use a specific configuration
+file, pass its path using the <code>--config</code> option.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-set"><a class="header" href="#create-a-set">Create a Set</a></h1>
+<blockquote>
+<p><code>n34 sets new</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Create a new set
+
+Usage: n34 sets new [OPTIONS] &lt;NAME&gt;
+
+Arguments:
+  &lt;NAME&gt;  Unique name for the set
+
+Options:
+      --set-relay &lt;RELAYS&gt;         Optional relay to add it to the set, either as URL or set name to extract its relays. [aliases: `--sr`]
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Each set requires a unique name, provided as the final argument to the command.
+Use the <code>--set-relays</code>/<code>--sr</code> option to specify the relays for the new set;
+this can be a relay URL or the name of an existing set whose relays you wish to
+use. To add repositories, use the <code>--repo</code> option. Check <a href="sets//commands.html#passing-repositories">passing repositories</a>
+format.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="modify-a-set"><a class="header" href="#modify-a-set">Modify a Set</a></h1>
+<blockquote>
+<p><code>n34 sets update</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Modify an existing set
+
+Usage: n34 sets update [OPTIONS] &lt;NAME&gt;
+
+Arguments:
+  &lt;NAME&gt;  Name of the set to update
+
+Options:
+      --set-relay &lt;RELAYS&gt;         Add relay to the set, either as URL or set name to extract its relays. [aliases: `--sr`]
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+      --override                   Replace existing relays/repositories instead of adding to them
+</code></pre>
+<p>Use this command to update an existing set by its name. By default, providing
+relays via <code>--set-relay</code> or repositories via <code>--repo</code> will add them to the set's
+existing entries. To replace the current relays and repositories with the new
+values, use the <code>--override</code> flag. See <a href="sets//commands.html#passing-repositories">passing repositories</a> for details on
+accepted formats.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="show-a-set"><a class="header" href="#show-a-set">Show a Set</a></h1>
+<blockquote>
+<p><code>n34 sets show</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Show a single set or all the stored sets
+
+Usage: n34 sets show [NAME]
+
+Arguments:
+  [NAME]  Name of the set to display. If not provided, lists all available sets
+</code></pre>
+<p>Prints all set names to standard output, each followed by its associated repos
+and relays. To view the details for a specific set, provide its name as an
+argument.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="remove-a-set"><a class="header" href="#remove-a-set">Remove a Set</a></h1>
+<blockquote>
+<p><code>n34 sets remove</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Remove a set, or specific repos and relays within it
+
+Usage: n34 sets remove [OPTIONS] &lt;NAME&gt;
+
+Arguments:
+  &lt;NAME&gt;  Set name to delete
+
+Options:
+      --set-relay &lt;RELAYS&gt;         Specific relay to remove it from the set, either as URL or set name to extract its relays. [aliases: `--sr`]
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Removes an entire set, or specific repositories and relays from it.
+Without options, this command deletes the entire set.</p>
+<p>See the <a href="sets//commands.html#passing-repositories">passing repositories</a> section for more details on supported formats.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="manage-configuration"><a class="header" href="#manage-configuration">Manage Configuration</a></h1>
+<p>Configuration allows you to set default values for various command parameters,
+such as fallback relays, Proof of Work (PoW) difficulty, a default bunker URL,
+and your Nostr private key (keyring). This avoids the need to enter your private key,
+bunker URL, relays, or PoW difficulty for every command, making <code>n34</code> more
+convenient to use.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="default-pow-difficulty"><a class="header" href="#default-pow-difficulty">Default PoW Difficulty</a></h1>
+<blockquote>
+<p><code>n34 config pow</code></p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Sets the default PoW difficulty (0 if not specified)
+
+Usage: n34 config pow &lt;DIFFICULTY&gt;
+
+Arguments:
+  &lt;DIFFICULTY&gt;  The new default PoW difficulty
+</code></pre>
+<p>This command configures the default Proof of Work (PoW) difficulty for newly
+created events. This setting is applied to most generated events, but it
+intentionally skips patch events. Because patches can be numerous, calculating
+PoW for each one would significantly slow down operations.</p>
+<p>If you want to disable the PoW just make it 0.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fallback-relays"><a class="header" href="#fallback-relays">Fallback Relays</a></h1>
+<blockquote>
+<p><code>n34 config relays</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Sets the default fallback relays if none provided. Use this relays for read and write
+
+Usage: n34 config relays [OPTIONS] [RELAYS]...
+
+Arguments:
+  [RELAYS]...  List of relay URLs to append to fallback relays. If empty, removes all fallback relays
+
+Options:
+      --override  Replace existing fallback relays instead of appending new ones
+</code></pre>
+<p>This command configures the default fallback relays, which <code>n34</code> uses to read
+from and write to. To add relays, provide their URLs as arguments to append
+them to the current list. Use the <code>--override</code> flag to replace the existing list
+entirely. To clear all fallback relays, run the command without any arguments.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nip-07-browser-signer-proxy"><a class="header" href="#nip-07-browser-signer-proxy">NIP-07 Browser Signer Proxy</a></h1>
+<blockquote>
+<p><code>n34 config nip07</code></p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Manage the NIP-07 browser signer proxy by enabling or disabling it and configuring the `ip:port` address.
+
+Usage: n34 config nip07 [OPTIONS] &lt;--enable|--disable&gt;
+
+Options:
+      --enable       Enable NIP-07 as the default signer
+      --disable      Disable NIP-07 as the default signer
+      --addr &lt;ADDR&gt;  Set the `ip:port` for the browser signer proxy (default: 127.0.0.1:51034)
+</code></pre>
+<p>Use <a href="https://github.com/nostr-protocol/nips/blob/master/07.md">NIP-07</a> (Browser Extension Signer) as your default signer. This is achieved
+by running a proxy at the specified <code>ADDR</code>, which defaults to <code>127.0.0.1:51034</code>.
+The proxy forwards <code>n34</code> requests to the browser signer and relays the responses
+back.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nip-46-bunker"><a class="header" href="#nip-46-bunker">NIP-46 Bunker</a></h1>
+<blockquote>
+<p><code>n34 config bunker</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Sets a URL of NIP-46 bunker server used for signing events
+
+Usage: n34 config bunker [BUNKER_URL]
+
+Arguments:
+  [BUNKER_URL]  Nostr Connect URL for the bunker. Omit this to remove the current bunker URL
+</code></pre>
+<p>This command configures <code>n34</code> to use a remote signer (<a href="https://github.com/nostr-protocol/nips/blob/master/46.md">NIP-46</a>), known as a
+bunker, for all cryptographic operations.</p>
+<p>When <code>n34</code> communicates with the bunker, it uses a persistent, locally-generated
+keypair. You should add this keypair's public key to your bunker's list of
+authorized applications. This allows <code>n34</code> to operate securely without needing
+direct access to your main private key.</p>
+<p>Once configured, actions such as fetching your public key or signing events are
+delegated to the bunker. To remove the bunker configuration, run the command
+again without providing a URL.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="secret-key-keyring"><a class="header" href="#secret-key-keyring">Secret Key Keyring</a></h1>
+<blockquote>
+<p><code>n34 config keyring</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Manages the secret key keyring, including enabling, disabling, or resetting it.
+
+Usage: n34 config keyring &lt;--enable|--disable|--reset&gt;
+
+Options:
+      --enable   Enables the secret key keyring. You will be prompted for your key one last time to store it.
+      --disable  Disables the secret key keyring. This removes the stored key and prevents new ones from being saved.
+      --reset    Resets the keyring. This deletes the current key, allowing a new one to be stored on the next use.
+</code></pre>
+<p>To avoid entering your private key for every command, you can enable the keyring
+to store it securely. First, run <code>n34 config keyring --enable</code>. The next time
+you run an <code>n34</code> command that requires your private key, it will be saved
+to your system's keyring. You will not need to enter it again for subsequent
+commands.</p>
+<p>To replace the stored key with a new one, use the <code>--reset</code> flag. To stop using
+the keyring and remove the stored key, use the <code>--disable</code> flag.</p>
+<p><code>n34</code> uses your operating system's native secret management system. For example,
+it uses <code>keyutils</code> on Linux and <code>Keychain</code> on macOS.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="manage-repositories"><a class="header" href="#manage-repositories">Manage Repositories</a></h1>
+<p>In <code>n34</code> you can manage your repositories. This includes announcing new ones,
+viewing existing ones, and announcing state updates (coming soon).</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="broadcast-and-update-a-git-repository"><a class="header" href="#broadcast-and-update-a-git-repository">Broadcast and Update a Git Repository</a></h1>
+<blockquote>
+<p><code>n34 repo announce</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Broadcast and update a git repository
+
+Usage: n34 repo announce [OPTIONS] --id &lt;REPO_ID&gt;
+
+Options:
+      --id &lt;REPO_ID&gt;               Unique identifier for the repository in kebab-case
+  -n, --name &lt;NAME&gt;                A name for the repository
+  -d, --description &lt;DESCRIPTION&gt;  A description for the repository
+  -w, --web &lt;WEB&gt;                  Webpage URLs for the repository (if provided by the git server)
+  -c, --clone &lt;CLONE&gt;              URLs for cloning the repository
+  -m, --maintainers &lt;MAINTAINERS&gt;  Additional maintainers of the repository (besides yourself)
+  -l, --label &lt;LABEL&gt;              Labels to categorize the repository. Can be specified multiple times
+      --parent &lt;PARENT&gt;            Specifies the parent repository when this is a fork
+      --force-id                   Skip kebab-case validation for the repository ID
+      --address-file               If set, creates a `nostr-address` file to enable automatic address discovery by n34
+</code></pre>
+<p>This command generates an announcement event to publish your project. It can be
+used to announce a new repository or update an existing one.</p>
+<p>When updating, you must resubmit all repository fields, not just the fields
+you wish to change. The command uses this information to build and publish a
+completely new announcement event that will replace the old one.</p>
+<p>It is recommended to use the <code>--address-file</code> flag. This option creates
+a <code>nostr-address</code> file that enables <code>n34</code> to automatically discover the
+repository's address, simplifying the workflow for contributors.</p>
+<p>The parent format is "parent,author". For HTTPS git repos, include the author's
+public key: e.g., "https://git.example.com/repo.git,npub1...". If the repo has
+a Nostr announcement, you can just use "<nip05>/<repo-name>" or a Nostr address
+like "naddr1..." with no author.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="view-git-repository-details"><a class="header" href="#view-git-repository-details">View Git Repository Details</a></h1>
+<blockquote>
+<p><code>n34 repo view</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>View details of a nostr git repository
+
+Usage: n34 repo view [NADDR-NIP05-OR-SET]...
+
+Arguments:
+  [NADDR-NIP05-OR-SET]...  Repository addresses
+</code></pre>
+<p>This command prints repository details to standard output. If no arguments
+are provided, it looks for a <code>nostr-address</code> file in the current directory
+and displays the details for the address specified within it. See <a href="repo//commands.html#passing-repositories">passing
+repositories</a> for details on accepted formats.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="repository-state-announcements"><a class="header" href="#repository-state-announcements">Repository State Announcements</a></h1>
+<blockquote>
+<p><code>n34 repo state</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Repository state announcements
+
+Usage: n34 repo state [OPTIONS] &lt;HEAD&gt;
+
+Arguments:
+  &lt;HEAD&gt;  Name of the repository's primary branch, such as 'master' or 'main'
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+      --tags &lt;TAGS&gt;                Tags to announce a state for, in the format `&lt;tag-name&gt;=&lt;commit-id&gt;`. Separated by comma
+      --branches &lt;BRANCHES&gt;        Branches to announce a state for, in the format `&lt;branch-name&gt;=&lt;commit-id&gt;`. Separated by comma
+</code></pre>
+<p>This command announces your repository state, enabling secure pushes to
+permissionless git repositories such as a <a href="https://gitgrasp.com">GRASP</a> relay.</p>
+<p>To get the commit ID that a branch or tag points to, use <code>git rev-parse &lt;tag-or-branch-name&gt;</code>. You can automate this process by creating a script to
+generate the required input for this command.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reply-to-issues-and-patches"><a class="header" href="#reply-to-issues-and-patches">Reply to Issues and Patches</a></h1>
+<blockquote>
+<p><code>n34 reply</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Reply to issues and patches
+
+Usage: n34 reply [OPTIONS] &lt;--comment &lt;COMMENT&gt;|--editor&gt; &lt;nevent1-or-note1&gt;
+
+Arguments:
+  &lt;nevent1-or-note1&gt;  The issue, patch, or comment to reply to
+
+Options:
+      --quote-to                   Quote the replied-to event in the editor
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+  -c, --comment &lt;COMMENT&gt;          The comment (cannot be used with --editor)
+  -e, --editor                     Open editor to write comment (cannot be used with --content)
+</code></pre>
+<p>Craft replies (<a href="https://github.com/nostr-protocol/nips/blob/master/22.md">NIP-22</a> Comment) to issues, patches, or comments with ease
+using the <code>n34 reply</code> command. You can either input your reply directly with
+the <code>--comment</code> option or open an editor for a more detailed response using
+<code>--editor</code>. Additionally, when using <code>--editor</code>, the <code>--quote-to</code> option
+allows you to include the original content in your editor, enabling precise and
+context-aware replies.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="issue-management"><a class="header" href="#issue-management">Issue Management</a></h1>
+<p>Using <code>n34</code>, you can manage Git issues stored in Nostr relays, adhering to
+the <a href="https://github.com/nostr-protocol/nips/blob/master/34.md">NIP-34</a> standard. In Nostr, events are immutable, meaning their IDs are
+derived from the SHA-256 hash of their timestamp, content, author, and tags.
+As a result, issues cannot be edited directly. However, with <code>n34</code>, you can
+create new issues, view existing ones, or update their status—such as closing,
+resolving, or reopening them.</p>
+<p><a href="https://github.com/nostr-protocol/nips/blob/master/34.md">NIP-34</a> introduces support for drafting issues, though this feature is not
+currently implemented in <code>n34</code> due to the lack of a clear use case for drafting
+issues. The inclusion of this functionality may stem from its shared use in both
+issues and patches, suggesting it was primarily designed for patch management.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="create-an-issue"><a class="header" href="#create-an-issue">Create an Issue</a></h1>
+<blockquote>
+<p><code>n34 issue new</code> Command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Create a new repository issue
+
+Usage: n34 issue new [OPTIONS] &lt;--content &lt;CONTENT&gt;|--editor&gt;
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+  -c, --content &lt;CONTENT&gt;          Markdown content for the issue. Cannot be used together with the `--editor` flag
+  -e, --editor                     Opens the user's default editor to write issue content. The first line will be used as the issue subject
+      --subject &lt;SUBJECT&gt;          The issue subject. Cannot be used together with the `--editor` flag
+  -l, --label &lt;LABEL&gt;              Labels for the issue. Can be specified as arguments (-l bug) or hashtags in content (#bug)
+</code></pre>
+<p>Use the <code>n34 issue new</code> command to create a new issue in a repository. This
+command supports the [NIP-21] (<code>nostr:</code> URI scheme) and hashtags within the
+issue content. When you mention public keys in the content, they will be
+included in the event tags. Additionally, using hashtags like <code>#bug</code> in the
+issue body will automatically apply them as labels.</p>
+<p>You must choose between the <code>--content</code> and <code>--editor</code> options. With
+<code>--content</code>, you provide the issue content directly in the command. With
+<code>--editor</code>, your default <code>$EDITOR</code> will open, allowing you to write the issue
+content. The first line of the editor's output will be used as the issue
+subject.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="view-an-issue"><a class="header" href="#view-an-issue">View an Issue</a></h1>
+<blockquote>
+<p><code>n34 issue view</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>View an issue by its ID
+
+Usage: n34 issue view [OPTIONS] &lt;ISSUE_ID&gt;
+
+Arguments:
+  &lt;ISSUE_ID&gt;  The issue id to view it
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Simply provide the issue ID in <code>note</code> or <code>nevent</code> format to retrieve and display
+the issue details.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reopen-an-issue"><a class="header" href="#reopen-an-issue">Reopen an Issue</a></h1>
+<blockquote>
+<p><code>n34 issue reopen</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Reopens a closed issue
+
+Usage: n34 issue reopen [OPTIONS] &lt;ISSUE_ID&gt;
+
+Arguments:
+  &lt;ISSUE_ID&gt;  The ID of the closed issue to reopen
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1630</code> (Open status) for the specified issue. The issue have to
+be closed.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="close-an-issue"><a class="header" href="#close-an-issue">Close an Issue</a></h1>
+<blockquote>
+<p><code>n34 issue close</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Closes an open issue
+
+Usage: n34 issue close [OPTIONS] &lt;ISSUE_ID&gt;
+
+Arguments:
+  &lt;ISSUE_ID&gt;  The open issue id to close it
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1632</code> (Close status) for the specified issue. The issue have to
+be open.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="resolve-an-issue"><a class="header" href="#resolve-an-issue">Resolve an Issue</a></h1>
+<blockquote>
+<p><code>n34 issue resolve</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Resolves an issue
+
+Usage: n34 issue resolve [OPTIONS] &lt;ISSUE_ID&gt;
+
+Arguments:
+  &lt;ISSUE_ID&gt;  The issue id to resolve it
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1631</code> (Resolved status) event for the specified issue.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="list-issues"><a class="header" href="#list-issues">List Issues</a></h1>
+<blockquote>
+<p><code>n34 issue list</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>List the repositories issues
+
+Usage: n34 issue list [OPTIONS] [NADDR-NIP05-OR-SET]...
+
+Arguments:
+  [NADDR-NIP05-OR-SET]...  Repository addresses
+
+Options:
+      --limit &lt;LIMIT&gt;  Maximum number of issues to list [default: 15]
+</code></pre>
+<p>List the repositories issues. By default <code>n34</code> will look for <code>nostr-address</code>
+file and extract the repositories from it.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="patch-management"><a class="header" href="#patch-management">Patch Management</a></h1>
+<p>In <code>n34</code>, patch management is designed to give you complete control. You can
+manually generate patch files using <code>git-format-patch</code> and then broadcast them
+to Nostr relays. This ensures that you have full authority over the content
+and structure of your patches, allowing for precise customization as per your
+requirements.</p>
+<p>Similarly, when fetching patches, <code>n34</code> provides them to you without
+automatically applying, merging, or checking them. This empowers you to review
+the patches at your own pace and decide whether to merge or apply them as
+needed. You retain full control over the entire process, ensuring a tailored
+approach to patch management.</p>
+<h2 id="patch-status-management"><a class="header" href="#patch-status-management">Patch Status Management</a></h2>
+<p>You can assign a status to original patches, but revision patches do not have
+a specific status assigned to them. Instead, they inherit the status of the
+original patch. However, if the original patch is marked as <code>Applied/Merged</code>,
+the revision patch must be explicitly tagged to claim the same status. If not
+tagged, the revision patch status will be <code>Closed</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="send-patches-to-a-repository"><a class="header" href="#send-patches-to-a-repository">Send Patches to a Repository</a></h1>
+<blockquote>
+<p><code>n34 patch send</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Send one or more patches to a repository
+
+Usage: n34 patch send [OPTIONS] &lt;PATCH-PATH&gt;...
+
+Arguments:
+  &lt;PATCH-PATH&gt;...  Space-separated list of patch files to send. Use `-` to read from stdin.
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+      --original-patch &lt;EVENT-ID&gt;  Original patch ID if this is a revision of it
+</code></pre>
+<p>Send your generated patches to the repositories specified using the <code>--repo</code>
+option or retrieved from the <code>nostr-address</code> file. When submitting a revision
+of an existing patch, include the original patch ID to ensure it’s correctly
+referenced in your revision patch event.</p>
+<p>You can also pass patches from stdin, retrieved from a website or directly from
+<code>git-format-patch</code>. Simply use <code>-</code> as the patch path. For example:</p>
+<pre><code class="language-bash">git format-patch --stdout --base master master..HEAD | n34 patch send -
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fetch-a-patch"><a class="header" href="#fetch-a-patch">Fetch a Patch</a></h1>
+<blockquote>
+<p><code>n34 patch fetch</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Fetches a patch by its id
+
+Usage: n34 patch fetch [OPTIONS] &lt;PATCH_ID&gt;
+
+Arguments:
+  &lt;PATCH_ID&gt;  The patch id to fetch it
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+  -o, --output &lt;PATH&gt;              Directory for saving patches. Defaults to the current directory. Use `-` for stdout output
+</code></pre>
+<p>Fetches patches using their original patch ID. All fetched patches will be saved
+to the specified output directory (current directory by default). You can then
+apply or merge these patches into your branch as needed.</p>
+<p>You can also write patches to stdout for direct application with tools like
+<code>git-am</code>. For instance, to fetch and apply patches use:</p>
+<pre><code class="language-bash">n34 patch fetch -o '-' &lt;note1...&gt; | git am --empty=drop
+</code></pre>
+<p>The <code>--empty=drop</code> option ensures empty commits, such as cover letters, are
+omitted.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="close-a-patch"><a class="header" href="#close-a-patch">Close a Patch</a></h1>
+<blockquote>
+<p><code>n34 patch close</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Closes an open or drafted patch
+
+Usage: n34 patch close [OPTIONS] &lt;PATCH_ID&gt;
+
+Arguments:
+  &lt;PATCH_ID&gt;  The open/drafted patch id to close it. Must be orignal root patch
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1632</code> (Close status) for the specified patch. The patch have to
+be open or drafted.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="convert-to-draft"><a class="header" href="#convert-to-draft">Convert to Draft</a></h1>
+<blockquote>
+<p><code>n34 patch draft</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Converts an open patch to draft state
+
+Usage: n34 patch draft [OPTIONS] &lt;PATCH_ID&gt;
+
+Arguments:
+  &lt;PATCH_ID&gt;  The open patch id to draft it. Must be orignal root patch
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1633</code> (Draft status) for the specified patch. The patch have to
+be open.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reopen-a-patch"><a class="header" href="#reopen-a-patch">Reopen a Patch</a></h1>
+<blockquote>
+<p><code>n34 patch reopen</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Reopens a closed or drafted patch
+
+Usage: n34 patch reopen [OPTIONS] &lt;PATCH_ID&gt;
+
+Arguments:
+  &lt;PATCH_ID&gt;  The closed/drafted patch id to reopen it. Must be orignal root patch
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1630</code> (Open status) for the specified patch. The patch have to
+be closed or drafted.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mark-as-applied"><a class="header" href="#mark-as-applied">Mark as Applied</a></h1>
+<blockquote>
+<p><code>n34 patch apply</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Set an open patch status to applied
+
+Usage: n34 patch apply [OPTIONS] &lt;PATCH_ID&gt; [APPLIED_COMMITS]...
+
+Arguments:
+  &lt;PATCH_ID&gt;            The open patch id to apply it. Must be orignal root patch or revision root
+  &lt;APPLIED_COMMITS&gt;...  The applied commits
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+      --patches &lt;PATCH-EVENT-ID&gt;   Patches that have been applied. Use this when only some patches have been applied, not all
+</code></pre>
+<p>Creates a kind <code>1631</code> event (Applied/Merged status) for the specified patch. The
+patch must be in open status.</p>
+<p>You can specify either an original patch or revision patch ID, but the status
+event will only reference the original patch. Revision patches will be mentioned
+in the event.</p>
+<p>The <code>APPLIED_COMMITS</code> field serves to inform clients about the status of
+specific commits, whether they have been applied or not. If you need to retrieve
+the list of commits from a specific point (such as the tip of the master branch)
+up to the <code>HEAD</code>, you can use the following Git command: <code>git log --pretty=%H 'origin/master..HEAD'</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mark-as-merged"><a class="header" href="#mark-as-merged">Mark as Merged</a></h1>
+<blockquote>
+<p><code>n34 patch merge</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Set an open patch status to merged
+
+Usage: n34 patch merge [OPTIONS] &lt;PATCH_ID&gt; &lt;MERGE_COMMIT&gt;
+
+Arguments:
+  &lt;PATCH_ID&gt;      The open patch id to merge it. Must be orignal root patch or revision root
+  &lt;MERGE_COMMIT&gt;  The merge commit id
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+      --patches &lt;PATCH-EVENT-ID&gt;   Patches that have been merged. Use this when only some patches have been merged, not all
+</code></pre>
+<p>Creates a kind <code>1631</code> event (Applied/Merged status) for the specified patch. The
+patch must be in open status.</p>
+<p>You can specify either an original patch or revision patch ID, but the status
+event will only reference the original patch. Revision patches will be mentioned
+in the event.</p>
+<p>You can get the <code>MERGE_COMMIT</code> commit using <code>git rev-parse HEAD</code> command if
+the merge commit in the <code>HEAD</code> or use <code>HEAD~n</code> where the <code>n</code> is the number of
+commits the merge commit before the HEAD</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="list-patches"><a class="header" href="#list-patches">List Patches</a></h1>
+<blockquote>
+<p><code>n34 patch list</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>List the repositories patches
+
+Usage: n34 patch list [OPTIONS] [NADDR-NIP05-OR-SET]...
+
+Arguments:
+  [NADDR-NIP05-OR-SET]...  Repository addresses
+
+Options:
+      --limit &lt;LIMIT&gt;  Maximum number of patches to list [default: 15]
+</code></pre>
+<p>List the repositories patches. By default <code>n34</code> will look for <code>nostr-address</code>
+file and extract the repositories from it.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pull-request-management"><a class="header" href="#pull-request-management">Pull Request Management</a></h1>
+<p>Pull requests are a new addition to <a href="https://github.com/nostr-protocol/nips/blob/master/34.md">NIP-34</a>, proposed by <a href="https://danconwaydev.com">DanConwayDev</a> in
+<a href="https://github.com/nostr-protocol/nips/pull/1966">nostr-protocol/nips#1966</a>. The concept is straightforward: it involves an event
+that notifies you of changes on a Git server, which can be any Git server. This
+event contains two key pieces of information, the Git repository URL and the
+commit tip. You can add this remote to your project, check out the specified
+commit, and then review or merge/rebase the changes as needed. Additionally,
+there is a <code>PR-update</code> event that informs you when the previous commit tip is no
+longer the head of the changes, such as when new changes are added or a rebase
+occurs.</p>
+<h2 id="why-use-the-commit-tip"><a class="header" href="#why-use-the-commit-tip">Why Use the Commit Tip?</a></h2>
+<p>Using the commit tip is preferable to relying on a branch name. A branch name
+simply points to a commit, so checking out a branch is effectively the same
+as checking out a specific commit. However, if we use the branch name instead
+of the commit, the changes can be altered by anyone, not just the pull request
+author. By checking out a specific commit ID, we ensure that the changes are
+exactly as intended by the pull request author and have not been tampered with
+by a malicious party.</p>
+<h2 id="does-n34-handle-git-operations"><a class="header" href="#does-n34-handle-git-operations">Does <code>n34</code> Handle Git Operations?</a></h2>
+<p>No, <code>n34</code> does not perform any Git operations. You can use the <code>n34 pr view</code>
+command to retrieve the pull request clone URL and the commit tip, allowing
+you to fetch the changes manually. Similarly, <code>n34 pr new</code> and <code>n34 pr update</code>
+do not interact with Git directly. They only prompt you for the clone URL and
+commit tip to construct the event. For more details on the philosophy behind
+<code>n34</code>, refer to the <a href="https://n34.dev/commands.html#philosophy">Philosophy</a> section.</p>
+<h2 id="why-use-pull-requests-instead-of-patches"><a class="header" href="#why-use-pull-requests-instead-of-patches">Why use pull requests instead of patches?</a></h2>
+<p>Pull requests are useful for large changes. Most relays limit events to 60KB,
+so if your changes exceed that limit (per event, not in total), consider using
+pull requests. Before using pull requests, check the relays limit, patches are
+more decentralized.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="create-a-pull-request"><a class="header" href="#create-a-pull-request">Create a Pull Request</a></h1>
+<blockquote>
+<p><code>n34 pr new</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr new [OPTIONS] &lt;--subject &lt;SUBJECT&gt;|--editor&gt; &lt;COMMIT&gt; &lt;CLONES&gt;...
+
+Arguments:
+  &lt;COMMIT&gt;     The SHA-1 hash of the commit at the tip of the PR branch
+  &lt;CLONES&gt;...  Repositories to clone for the pull request, separated by commas
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+      --body &lt;BODY&gt;                The body content of the pull request. Cannot be used together with the `--editor` flag
+      --subject &lt;SUBJECT&gt;          The subject or title of the pull request. Cannot be used together with the `--editor` flag
+  -e, --editor                     Opens the user's default editor to write PR subject and body
+      --labels &lt;LABELS&gt;            Labels to associate with the pull request, separated by commas
+      --branch &lt;BRANCH&gt;            The branch name for the pull request
+</code></pre>
+<p>Submit a pull request to the repositories specified using the <code>--repo</code> option or
+obtained from the <code>nostr-address</code> file.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="update-a-pull-request"><a class="header" href="#update-a-pull-request">Update a Pull Request</a></h1>
+<blockquote>
+<p><code>n34 pr update</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr update [OPTIONS] &lt;EVENT-ID&gt; &lt;COMMIT&gt; &lt;CLONES&gt;...
+
+Arguments:
+  &lt;EVENT-ID&gt;   Original PR ID
+  &lt;COMMIT&gt;     The SHA-1 hash of the commit at the tip of the PR branch
+  &lt;CLONES&gt;...  Repositories to clone for the pull request, separated by commas
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Update an existing pull request with the new changes.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="view-a-pull-request"><a class="header" href="#view-a-pull-request">View a Pull Request</a></h1>
+<blockquote>
+<p><code>n34 pr view</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr view [OPTIONS] &lt;EVENT-ID&gt;
+
+Arguments:
+  &lt;EVENT-ID&gt;  Pull request ID
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>View a specific pull request. This includes the pull request title, labels,
+description, clone URLs, and the latest commit tip. Use this information to
+fetch the changes.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="list-pull-requests"><a class="header" href="#list-pull-requests">List Pull Requests</a></h1>
+<blockquote>
+<p><code>n34 pr list</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr list [OPTIONS] [NADDR-NIP05-OR-SET]...
+
+Arguments:
+  [NADDR-NIP05-OR-SET]...  Repository addresses
+
+Options:
+      --limit &lt;LIMIT&gt;              Maximum number of patches to list [default: 15]
+</code></pre>
+<p>List the repositories pull requests. By default <code>n34</code> will look for
+<code>nostr-address</code> file and extract the repositories from it.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="close-a-pull-request"><a class="header" href="#close-a-pull-request">Close a Pull Request</a></h1>
+<blockquote>
+<p><code>n34 pr close</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr close [OPTIONS] &lt;PR_ID&gt;
+
+Arguments:
+  &lt;PR_ID&gt;  The open/draft PR id to close it
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1632</code> (Close status) for the specified PR. The PR have to be open
+or drafted.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="convert-to-draft-1"><a class="header" href="#convert-to-draft-1">Convert to Draft</a></h1>
+<blockquote>
+<p><code>n34 pr draft</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr draft [OPTIONS] &lt;PR_ID&gt;
+
+Arguments:
+  &lt;PR_ID&gt;  The open PR id to draft it
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1633</code> (Draft status) for the specified PR. The PR have to
+be open.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reopen-a-pull-request"><a class="header" href="#reopen-a-pull-request">Reopen a Pull Request</a></h1>
+<blockquote>
+<p><code>n34 pr reopen</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr reopen [OPTIONS] &lt;PR_ID&gt;
+
+Arguments:
+  &lt;PR_ID&gt;  The closed/drafted patch id to reopen it
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Issue a kind <code>1630</code> (Open status) for the specified PR. The PR have to
+be closed or drafted.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mark-as-applied-1"><a class="header" href="#mark-as-applied-1">Mark as Applied</a></h1>
+<blockquote>
+<p><code>n34 pr apply</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr apply [OPTIONS] &lt;PR_ID&gt; &lt;APPLIED_COMMITS&gt;...
+
+Arguments:
+  &lt;PR_ID&gt;               The open PR id to apply it
+  &lt;APPLIED_COMMITS&gt;...  The applied commits
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Creates a kind <code>1631</code> event (Applied/Merged status) for the specified PR. The PR
+must be in open status.</p>
+<p>The <code>APPLIED_COMMITS</code> field serves to inform clients about the status of
+specific commits, whether they have been applied or not. If you need to retrieve
+the list of commits from a specific point (such as the tip of the master branch)
+up to the <code>HEAD</code>, you can use the following Git command: <code>git log --pretty=%H 'origin/master..HEAD'</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mark-as-merged-1"><a class="header" href="#mark-as-merged-1">Mark as Merged</a></h1>
+<blockquote>
+<p><code>n34 pr merge</code> command</p>
+</blockquote>
+<p><strong>Usage:</strong></p>
+<pre><code>Usage: n34 pr merge [OPTIONS] &lt;PR_ID&gt; &lt;MERGE_COMMIT&gt;
+
+Arguments:
+  &lt;PR_ID&gt;         The open PR id to merge it
+  &lt;MERGE_COMMIT&gt;  The merge commit id
+
+Options:
+      --repo &lt;NADDR-NIP05-OR-SET&gt;  Repository addresses
+</code></pre>
+<p>Creates a kind <code>1631</code> event (Applied/Merged status) for the specified PR. The
+PR must be in open status.</p>
+<p>You can get the <code>MERGE_COMMIT</code> commit using <code>git rev-parse HEAD</code> command if
+the merge commit in the <code>HEAD</code> or use <code>HEAD~n</code> where the <code>n</code> is the number of
+commits the merge commit before the HEAD</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>
